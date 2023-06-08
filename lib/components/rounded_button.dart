@@ -13,24 +13,20 @@ class RoundedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return InkWell(
-      onTap: () {},
-      borderRadius: BorderRadius.circular(30),
-      child: Container(
-        width: size.width * 0.8,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: kPrimaryColor,
-        ),
+    return Container(
+      width: size.width * 0.8,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: kPrimaryColor,
+      ),
 
-        padding: EdgeInsets.symmetric(vertical: 20),
-        alignment: Alignment.center,
-        child: Text(
-          title,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18
-          ),
+      padding: EdgeInsets.symmetric(vertical: 20),
+      alignment: Alignment.center,
+      child: Text(
+        title,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 18
         ),
       ),
     );

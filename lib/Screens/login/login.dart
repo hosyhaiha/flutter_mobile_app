@@ -131,7 +131,8 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
               isLogin = !isLogin;
             });
           },
-          child: isLogin ? Text(
+          // onTap:() => print('tap to Sign up'),
+          child: isLogin ? const Text(
             "Don't have an account? Sign up",
             style: TextStyle(
               color: kPrimaryColor,

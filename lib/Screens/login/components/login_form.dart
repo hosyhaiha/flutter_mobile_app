@@ -34,29 +34,41 @@ class LoginForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
 
               children: [
-                Text(
+                const SizedBox(height: 55),
+                const Text(
                   'Welcome Back',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30
                   ),
                 ),
 
-                SizedBox(height: 40),
+                // const SizedBox(height: 10),
 
-                SvgPicture.asset('assets/images/login.svg'),
+                Transform.scale(
+                  scale: 0.8, // Tỷ lệ tăng lên 1.5 lần
 
-                SizedBox(height: 40),
+                  child: ColorFiltered(
+                    colorFilter: ColorFilter.mode(Color(0xFF0066B3),
+                        BlendMode.srcIn), // Mã màu #000 (đen)
+                    child: SvgPicture.asset(
+                        'assets/images/ONE_IoT_logo_48x180.svg'),
+                  ),
+                ),
 
-                RoundedInput(icon: Icons.mail, hint: 'Username'),
+                const SizedBox(height: 20),
 
-                RoundedPasswordInput(hint: 'Password'),
+                const RoundedInput(icon: Icons.mail, hint: 'Username'),
 
-                SizedBox(height: 10),
+                const RoundedPasswordInput(hint: 'Password'),
 
-                RoundedButton(title: 'LOGIN'),
+                const SizedBox(height: 10),
 
-                SizedBox(height: 10),
+                GestureDetector(
+                    onTap:() => print('tap to login'),
+                    child: const RoundedButton(title: 'LOGINN')),
+
+                const SizedBox(height: 10),
 
               ],
             ),

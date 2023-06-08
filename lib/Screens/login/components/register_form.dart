@@ -30,7 +30,7 @@ class RegisterForm extends StatelessWidget {
           child: Container(
             width: size.width,
             height: defaultLoginSize,
-            child: SingleChildScrollView(
+            child: const SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -41,14 +41,12 @@ class RegisterForm extends StatelessWidget {
                   Text(
                     'Welcome',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24
                     ),
                   ),
 
                   SizedBox(height: 40),
-
-                  SvgPicture.asset('assets/images/register.svg'),
 
                   SizedBox(height: 40),
 
