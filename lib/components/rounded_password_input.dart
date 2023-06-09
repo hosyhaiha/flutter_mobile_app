@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:demo3/components/input_container.dart';
-import 'package:demo3/constants.dart';
+import 'package:flutter_mobile_app/components/input_container.dart';
+import 'package:flutter_mobile_app/constants.dart';
 
 class RoundedPasswordInput extends StatelessWidget {
   const RoundedPasswordInput({

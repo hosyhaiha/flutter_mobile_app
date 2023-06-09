@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:demo3/Screens/login/login.dart';
-import 'package:demo3/constants.dart';
+import 'package:flutter_mobile_app/Screens/login/login.dart';
+import 'package:flutter_mobile_app/constants.dart';
 
 void main() {
   runApp(const MyApp());

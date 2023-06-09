@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:demo3/Screens/login/components/cancel_button.dart';
-import 'package:demo3/Screens/login/components/login_form.dart';
-import 'package:demo3/Screens/login/components/register_form.dart';
-import 'package:demo3/constants.dart';
+import 'package:flutter_mobile_app/Screens/login/components/cancel_button.dart';
+import 'package:flutter_mobile_app/Screens/login/components/login_form.dart';
+import 'package:flutter_mobile_app/Screens/login/components/register_form.dart';
+import 'package:flutter_mobile_app/constants.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:demo3/components/rounded_button.dart';
-import 'package:demo3/components/rounded_input.dart';
-import 'package:demo3/components/rounded_password_input.dart';
+import 'package:flutter_mobile_app/components/rounded_button.dart';
+import 'package:flutter_mobile_app/components/rounded_input.dart';
+import 'package:flutter_mobile_app/components/rounded_password_input.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginForm extends StatelessWidget {
