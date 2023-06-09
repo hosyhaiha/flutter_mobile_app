@@ -4,6 +4,8 @@ import 'package:flutter_mobile_app/components/rounded_input.dart';
 import 'package:flutter_mobile_app/components/rounded_password_input.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../home/home.dart';
+
 class LoginForm extends StatelessWidget {
   const LoginForm({
     Key? key,
@@ -65,7 +67,10 @@ class LoginForm extends StatelessWidget {
                 const SizedBox(height: 10),
 
                 GestureDetector(
-                    onTap:() => print('tap to login'),
+                    onTap: (){
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                    },
                     child: const RoundedButton(title: 'LOGINN')),
 
                 const SizedBox(height: 10),
