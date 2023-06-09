@@ -30,7 +30,7 @@ class CancelButton extends StatelessWidget {
           alignment: Alignment.bottomCenter,
 
           child: IconButton(
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
             onPressed: tapEvent,
             color: kPrimaryColor,
           ),

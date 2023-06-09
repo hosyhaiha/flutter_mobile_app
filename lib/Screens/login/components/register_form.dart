@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobile_app/components/rounded_button.dart';
 import 'package:flutter_mobile_app/components/rounded_input.dart';
 import 'package:flutter_mobile_app/components/rounded_password_input.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_mobile_app/components/rounded_dropdown.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({
@@ -27,10 +27,10 @@ class RegisterForm extends StatelessWidget {
         visible: !isLogin,
         child: Align(
           alignment: Alignment.bottomCenter,
-          child: Container(
+          child: SizedBox(
             width: size.width,
             height: defaultLoginSize,
-            child: const SingleChildScrollView(
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -46,17 +46,31 @@ class RegisterForm extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 40),
+                  SizedBox(height: 5),
 
-                  SizedBox(height: 40),
+                  RoundedInput(icon: Icons.account_circle_rounded, hint: 'First Name'),
 
-                  RoundedInput(icon: Icons.mail, hint: 'Username'),
+                  RoundedInput(icon: Icons.face_rounded, hint: 'Last Name'),
 
-                  RoundedInput(icon: Icons.face_rounded, hint: 'Name'),
+                  RoundedInput(icon: Icons.mail, hint: 'Email'),
 
-                  RoundedPasswordInput(hint: 'Password'),
+                  RoundedInput(icon: Icons.call, hint: 'Phone'),
 
-                  SizedBox(height: 10),
+                  RoundedDropdown(
+                    icon: Icons.place,
+                    hint: 'Country',
+                    dropdownValue: 'US',
+                    dropdownItems: ['US', 'Germany', 'England', 'Iran'],
+                    onChanged: (String? value) {
+                      // TODO: Handle dropdown value change
+                    },
+                  ),
+
+                  RoundedInput(icon: Icons.business, hint: 'Company'),
+
+                  RoundedInput(icon: Icons.man, hint: 'Tenant Name'),
+
+                  SizedBox(height: 20),
 
                   RoundedButton(title: 'SIGN UP'),
 

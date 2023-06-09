@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           textTheme: Typography.blackCupertino
       ),
-      home: LoginScreen(),
+      home: const LoginScreen(),
     );
   }
 }

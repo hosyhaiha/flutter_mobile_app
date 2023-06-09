@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobile_app/Screens/login/components/cancel_button.dart';
 import 'package:flutter_mobile_app/Screens/login/components/login_form.dart';
 import 'package:flutter_mobile_app/Screens/login/components/register_form.dart';
 import 'package:flutter_mobile_app/constants.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -15,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   bool isLogin = true;
   late Animation<double> containerSize;
   AnimationController? animationController;
-  Duration animationDuration = Duration(milliseconds: 270);
+  Duration animationDuration = const Duration(milliseconds: 270);
 
   @override
   void initState() {
@@ -114,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       child: Container(
         width: double.infinity,
         height: containerSize.value,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(100),
             topRight: Radius.circular(100),
