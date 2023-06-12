@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobile_app/Screens/home/listdevice.dart';
 import 'package:flutter_mobile_app/Screens/home/deviceitem.dart';
+import 'package:flutter_mobile_app/Screens/sidebar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,9 +14,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          AppBar(title: const Text("Home"), backgroundColor: Color(0xFF0066B3)),
-      drawer: const NavigationDrawer(),
+      drawer: NavBar(),
+      appBar: AppBar(
+        title: const Text("Home"),
+        backgroundColor: Color(0xFF0066B3),
+        centerTitle: true,
+        actions: [
+          IconButton(onPressed: () => null, icon: Icon(Icons.notifications))
+        ],
+      ),
+      // drawer: const NavigationDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: GridView(
@@ -31,21 +39,29 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class NavigationDrawer extends StatefulWidget {
-  const NavigationDrawer({super.key});
+// class NavigationDrawer extends StatefulWidget {
+//   const NavigationDrawer({super.key});
 
-  @override
-  State<NavigationDrawer> createState() => _NavigationDrawerState();
-}
+//   @override
+//   State<NavigationDrawer> createState() => _NavigationDrawerState();
+// }
 
-class _NavigationDrawerState extends State<NavigationDrawer> {
-  @override
-  Widget build(BuildContext context) {
-    return Drawer();
-  }
-}
+// class _NavigationDrawerState extends State<NavigationDrawer> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Drawer();
+//   }
+// }
 
 late final List<listofDevice> dataforList = [
+  listofDevice(name: 'device1'),
+  listofDevice(name: 'device2'),
+  listofDevice(name: 'device3'),
+  listofDevice(name: 'device4'),
+  listofDevice(name: 'device1'),
+  listofDevice(name: 'device2'),
+  listofDevice(name: 'device3'),
+  listofDevice(name: 'device4'),
   listofDevice(name: 'device1'),
   listofDevice(name: 'device2'),
   listofDevice(name: 'device3'),
