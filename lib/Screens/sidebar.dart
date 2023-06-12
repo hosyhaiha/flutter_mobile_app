@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile_app/Screens/device/devicedata.dart';
+import 'package:flutter_mobile_app/Screens/home/home.dart';
 import 'package:flutter_mobile_app/Screens/login/login.dart';
 
 class NavBar extends StatelessWidget {
@@ -6,6 +8,20 @@ class NavBar extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
+  }
+
+  void navigateToDevicePage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DeviceData()),
+    );
+  }
+
+  void navigateToHomePage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
     );
   }
 
@@ -39,19 +55,19 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.home),
             title: Text('Home'),
-            onTap: () => null,
+            onTap: () => navigateToHomePage(context),
           ),
           ListTile(
             leading: Icon(Icons.laptop),
             title: Text('Device'),
-            onTap: () => null,
+            onTap: () => navigateToDevicePage(context),
           ),
           ListTile(
             leading: Icon(Icons.notifications),
             title: Text('Notification'),
             onTap: () => null,
           ),
-          Divider(),
+          const Divider(),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Log out'),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile_app/Screens/home/listdevice.dart';
+import 'package:flutter_mobile_app/Screens/device/devicedata.dart';
 import 'package:flutter_mobile_app/Screens/home/deviceitem.dart';
 import 'package:flutter_mobile_app/Screens/sidebar.dart';
+import 'package:flutter_mobile_app/constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,13 +12,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void navigateToDevicePage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DeviceData()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavBar(),
       appBar: AppBar(
         title: const Text("Home"),
-        backgroundColor: Color(0xFF0066B3),
+        backgroundColor: kPrimaryColor,
         centerTitle: true,
         actions: [
           IconButton(onPressed: () => null, icon: Icon(Icons.notifications))
@@ -32,7 +40,16 @@ class _HomePageState extends State<HomePage> {
               childAspectRatio: 3 / 2,
               crossAxisSpacing: 20,
               mainAxisSpacing: 20),
-          children: dataforList.map((e) => DeviceItem(e.name)).toList(),
+          children: dataforList.map((e) {
+            return GestureDetector(
+              onTap: () {
+                // Xử lý sự kiện khi thành phần được nhấn
+                print('Tapped item: ${e.name}');
+                navigateToDevicePage(context);
+              },
+              child: DeviceItem(e.name),
+            );
+          }).toList(),
         ),
       ),
     );
@@ -52,6 +69,12 @@ class _HomePageState extends State<HomePage> {
 //     return Drawer();
 //   }
 // }
+
+class listofDevice {
+  final String name;
+
+  listofDevice({required this.name});
+}
 
 late final List<listofDevice> dataforList = [
   listofDevice(name: 'device1'),
