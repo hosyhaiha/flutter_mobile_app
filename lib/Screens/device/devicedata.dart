@@ -32,7 +32,10 @@ class _DeviceDataState extends State<DeviceData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavBar(),
+      drawer: NavBar(
+        isHomePage: false,
+        isDevicePage: true,
+      ),
       appBar: AppBar(
         title: const Text("Device Infomation"),
         backgroundColor: kPrimaryColor,

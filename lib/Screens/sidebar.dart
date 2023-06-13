@@ -4,6 +4,7 @@ import 'package:flutter_mobile_app/Screens/home/home.dart';
 import 'package:flutter_mobile_app/Screens/login/login.dart';
 
 class NavBar extends StatelessWidget {
+  final bool isHomePage, isDevicePage;
   void navigateToLoginPage(BuildContext context) {
     Navigator.push(
       context,
@@ -25,7 +26,20 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  const NavBar({super.key});
+  // void navigateToHomePage(BuildContext context) {
+  //   Navigator.pop(context); // Đóng thanh sidebar
+  //   if (isHomePage) {
+  //     print("This is " + isHomePage.toString());
+  //     return; // Không cần tải lại trang
+  //   }
+  //   Navigator.pushReplacement(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => HomePage()),
+  //   );
+  // }
+
+  const NavBar(
+      {super.key, required this.isHomePage, required this.isDevicePage});
 
   @override
   Widget build(BuildContext context) {
@@ -55,12 +69,24 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.home),
             title: Text('Home'),
-            onTap: () => navigateToHomePage(context),
+            onTap: () {
+              if (isHomePage) {
+                Navigator.pop(context); // Chỉ đóng thanh sidebar
+              } else {
+                navigateToHomePage(context); // Load lại trang Home
+              }
+            },
           ),
           ListTile(
             leading: Icon(Icons.laptop),
             title: Text('Device'),
-            onTap: () => navigateToDevicePage(context),
+            onTap: () {
+              if (isDevicePage) {
+                Navigator.pop(context); // Chỉ đóng thanh sidebar
+              } else {
+                navigateToDevicePage(context); // Load lại trang Home
+              }
+            },
           ),
           ListTile(
             leading: Icon(Icons.notifications),

@@ -22,7 +22,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavBar(),
+      drawer: NavBar(
+        isHomePage: true,
+        isDevicePage: false,
+      ),
       appBar: AppBar(
         title: const Text("Home"),
         backgroundColor: kPrimaryColor,
@@ -56,20 +59,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// class NavigationDrawer extends StatefulWidget {
-//   const NavigationDrawer({super.key});
-
-//   @override
-//   State<NavigationDrawer> createState() => _NavigationDrawerState();
-// }
-
-// class _NavigationDrawerState extends State<NavigationDrawer> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Drawer();
-//   }
-// }
-
 class listofDevice {
   final String name;
 
@@ -90,3 +79,8 @@ late final List<listofDevice> dataforList = [
   listofDevice(name: 'device3'),
   listofDevice(name: 'device4'),
 ];
+
+// bool isHomePage = true;
+// void setHomePageState(bool value) {
+//   isHomePage = value;
+// }
