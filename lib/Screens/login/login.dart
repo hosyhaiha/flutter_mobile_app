@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile_app/Screens/controller/LoginController.dart';
 import 'package:flutter_mobile_app/Screens/login/components/cancel_button.dart';
 import 'package:flutter_mobile_app/Screens/login/components/login_form.dart';
 import 'package:flutter_mobile_app/Screens/login/components/register_form.dart';
 import 'package:flutter_mobile_app/constants.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

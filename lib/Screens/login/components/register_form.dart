@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobile_app/components/rounded_button.dart';
 import 'package:flutter_mobile_app/components/rounded_input.dart';
-import 'package:flutter_mobile_app/components/rounded_password_input.dart';
 import 'package:flutter_mobile_app/components/rounded_dropdown.dart';
 
 class RegisterForm extends StatelessWidget {

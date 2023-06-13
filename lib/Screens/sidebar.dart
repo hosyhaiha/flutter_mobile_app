@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobile_app/Screens/login/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NavBar extends StatelessWidget {
   void navigateToLoginPage(BuildContext context) {
@@ -9,8 +10,9 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  const NavBar({super.key});
+  NavBar({super.key});
 
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -55,7 +57,11 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Log out'),
-            onTap: () => navigateToLoginPage(context),
+            onTap: () async {
+              final SharedPreferences? prefs = await _prefs;
+              prefs?.clear();
+              navigateToLoginPage(context);
+              },
           )
         ],
       ),

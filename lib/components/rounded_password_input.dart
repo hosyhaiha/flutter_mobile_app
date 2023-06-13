@@ -5,15 +5,18 @@ import 'package:flutter_mobile_app/constants.dart';
 class RoundedPasswordInput extends StatelessWidget {
   const RoundedPasswordInput({
     Key? key,
-    required this.hint
+    this.textEditingController,
+    required this.hint,
   }) : super(key: key);
 
   final String hint;
+  final TextEditingController? textEditingController;
 
   @override
   Widget build(BuildContext context) {
     return InputContainer(
       child: TextField(
+        controller: textEditingController,
         cursorColor: kPrimaryColor,
         obscureText: true,
         decoration: InputDecoration(
