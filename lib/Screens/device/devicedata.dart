@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobile_app/Screens/sidebar.dart';
 import 'package:flutter_mobile_app/components/rounded_dropdown.dart';
 import 'package:flutter_mobile_app/constants.dart';
-import 'package:charts_flutter/flutter.dart' as chartmodel;
 
 class DeviceData extends StatefulWidget {
   const DeviceData({super.key});
@@ -12,23 +11,6 @@ class DeviceData extends StatefulWidget {
 }
 
 class _DeviceDataState extends State<DeviceData> {
-  static List<chartmodel.Series<BarDataModel, String>> _createSampleData() {
-    final data = [
-      BarDataModel("January", 1500),
-      BarDataModel("F3bruary", 2600),
-      BarDataModel("March", 1700),
-      BarDataModel("April", 2300)
-    ];
-    return [
-      chartmodel.Series<BarDataModel, String>(
-          data: data,
-          id: 'example',
-          colorFn: (_, __) => chartmodel.MaterialPalette.teal.shadeDefault,
-          domainFn: (BarDataModel barDataModel, _) => barDataModel.time,
-          measureFn: (BarDataModel barDataModel, _) => barDataModel.value)
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,16 +43,6 @@ class _DeviceDataState extends State<DeviceData> {
           ),
           SizedBox(
             height: 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Container(
-              height: 300,
-              child: chartmodel.BarChart(
-                _createSampleData(),
-                animate: true,
-              ),
-            ),
           ),
           Row(
             children: [],
