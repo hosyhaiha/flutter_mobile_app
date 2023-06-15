@@ -10,6 +10,9 @@ class RoundedDropdown extends StatelessWidget {
     required this.dropdownValue,
     required this.dropdownItems,
     required this.onChanged,
+    this.maxHeight,
+    this.iconSize,
+    this.fontSize,
   }) : super(key: key);
 
   final IconData icon;
@@ -17,31 +20,49 @@ class RoundedDropdown extends StatelessWidget {
   final String dropdownValue;
   final List<String> dropdownItems;
   final void Function(String?) onChanged;
+  final double? maxHeight;
+  final double? iconSize;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
-    return InputContainer(
-      child: Row(
-        children: [
-          Icon(icon, color: kPrimaryColor),
-          SizedBox(width: 10),
-          Expanded(
-            child: DropdownButtonFormField<String>(
-              value: dropdownValue,
-              onChanged: onChanged,
-              decoration: InputDecoration(
-                hintText: hint,
-                border: InputBorder.none,
-              ),
-              items: dropdownItems.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
+    return Container(
+      constraints: BoxConstraints(maxHeight: maxHeight ?? double.infinity),
+      child: InputContainer(
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: kPrimaryColor,
+              size: iconSize,
             ),
-          ),
-        ],
+            // SizedBox(width: 10),
+            Expanded(
+              child: DropdownButtonFormField<String>(
+                value: dropdownValue,
+                onChanged: onChanged,
+                decoration: InputDecoration(
+                  hintText: hint,
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 0,
+                    horizontal: 7,
+                  ),
+                ),
+                style: TextStyle(
+                  fontSize: fontSize,
+                  color: Colors.black,
+                ),
+                items: dropdownItems.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
