@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile_app/Screens/device/devicedata.dart';
+// import 'package:flutter_mobile_app/Screens/device/devicedata.dart';
 import 'package:flutter_mobile_app/Screens/home/home.dart';
 import 'package:flutter_mobile_app/Screens/login/login.dart';
 
@@ -12,12 +12,12 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  void navigateToDevicePage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => DeviceData()),
-    );
-  }
+  // void navigateToDevicePage(BuildContext context) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => DeviceData()),
+  //   );
+  // }
 
   void navigateToHomePage(BuildContext context) {
     Navigator.push(
@@ -77,17 +77,17 @@ class NavBar extends StatelessWidget {
               }
             },
           ),
-          ListTile(
-            leading: Icon(Icons.laptop),
-            title: Text('Device'),
-            onTap: () {
-              if (isDevicePage) {
-                Navigator.pop(context); // Chỉ đóng thanh sidebar
-              } else {
-                navigateToDevicePage(context); // Load lại trang Home
-              }
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.laptop),
+          //   title: Text('Device'),
+          //   onTap: () {
+          //     if (isDevicePage) {
+          //       Navigator.pop(context); // Chỉ đóng thanh sidebar
+          //     } else {
+          //       navigateToDevicePage(context); // Load lại trang Home
+          //     }
+          //   },
+          // ),
           ListTile(
             leading: Icon(Icons.notifications),
             title: Text('Notification'),

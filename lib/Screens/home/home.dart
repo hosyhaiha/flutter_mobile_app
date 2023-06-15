@@ -12,11 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String? selectedChartType;
-  List<PHData> _phChartData = getPHData30days();
-  List<ORPdata> _orpChartData = getORPData30days();
-  List<ECData> _ecChartData = getECData30days();
-  List<DOData> _doChartData = getDOData30days();
-  List<TurbidityData> _turbidityChartData = getTurbidityData30days();
+  List<ChartData> _chartData = getChartData30days();
 
   String _selectedDeviceOption = "Device 1";
   List<String> _deviceoptions = [
@@ -31,6 +27,17 @@ class _HomePageState extends State<HomePage> {
     '12 tháng gần nhất'
   ];
 
+  Color colorBtnPH = Colors.black;
+  Color colorBtnORP = Colors.black;
+  Color colorBtnEC = Colors.black;
+  Color colorBtnDO = Colors.blueAccent;
+  Color colorBtnTUR = Colors.black;
+
+  Color colorContaner1 = Colors.black;
+  Color colorContaner2 = Colors.black;
+  Color colorContaner3 = Colors.blueAccent;
+  Color colorContaner4 = Colors.blueAccent;
+
   bool isPHVisible = false;
   bool isORPVisible = false;
   bool isECVisible = false;
@@ -40,15 +47,13 @@ class _HomePageState extends State<HomePage> {
 
   void _onDropdownTimeChanged(String? newValue) {
     if (newValue != _selectedTimeOption) {
+      setState(() {
+        _selectedTimeOption = newValue!;
+      });
+      print('New dropdown value: $_selectedTimeOption');
       if (newValue == '12 tháng gần nhất') {
         setState(() {
-          _selectedTimeOption = newValue!;
-          // print('New dropdown value: $_selectedTimeOption');
-          _phChartData = getPHData();
-          _orpChartData = getORPData();
-          _ecChartData = getECData();
-          _doChartData = getDOData();
-          _turbidityChartData = getTurbidityData();
+          _chartData = getChartData();
         });
       }
     }
@@ -114,6 +119,18 @@ class _HomePageState extends State<HomePage> {
                     TextButton(
                       onPressed: () {
                         setState(() {
+                          //Nút
+                          colorBtnPH = Colors.blueAccent;
+                          colorBtnORP = Colors.black;
+                          colorBtnEC = Colors.black;
+                          colorBtnDO = Colors.black;
+                          colorBtnTUR = Colors.black;
+                          //Ngăn cách
+                          colorContaner1 = Colors.blueAccent;
+                          colorContaner2 = Colors.black;
+                          colorContaner3 = Colors.black;
+                          colorContaner4 = Colors.black;
+                          //Biểu đồ
                           isPHVisible = true;
                           isORPVisible = false;
                           isECVisible = false;
@@ -123,18 +140,30 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       style: TextButton.styleFrom(
-                        primary: Colors.black, // Màu chữ của nút
-                      ),
+                          primary: colorBtnPH // Màu chữ của nút
+                          ),
                       child: Text('PH'),
                     ),
                     Container(
                       width: 1.0,
                       height: 25,
-                      color: Colors.black,
+                      color: colorContaner1,
                     ),
                     TextButton(
                       onPressed: () {
                         setState(() {
+                          //Nút
+                          colorBtnPH = Colors.black;
+                          colorBtnORP = Colors.blueAccent;
+                          colorBtnEC = Colors.black;
+                          colorBtnDO = Colors.black;
+                          colorBtnTUR = Colors.black;
+                          //Ngăn cách
+                          colorContaner1 = Colors.blueAccent;
+                          colorContaner2 = Colors.blueAccent;
+                          colorContaner3 = Colors.black;
+                          colorContaner4 = Colors.black;
+                          //Biểu đồ
                           isPHVisible = false;
                           isORPVisible = true;
                           isECVisible = false;
@@ -144,18 +173,30 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       style: TextButton.styleFrom(
-                        primary: Colors.black, // Màu chữ của nút
+                        primary: colorBtnORP, // Màu chữ của nút
                       ),
                       child: Text('ORP'),
                     ),
                     Container(
                       width: 1.0,
                       height: 25,
-                      color: Colors.black,
+                      color: colorContaner2,
                     ),
                     TextButton(
                       onPressed: () {
                         setState(() {
+                          //Nút
+                          colorBtnPH = Colors.black;
+                          colorBtnORP = Colors.black;
+                          colorBtnEC = Colors.blueAccent;
+                          colorBtnDO = Colors.black;
+                          colorBtnTUR = Colors.black;
+                          //Ngăn cách
+                          colorContaner1 = Colors.black;
+                          colorContaner2 = Colors.blueAccent;
+                          colorContaner3 = Colors.blueAccent;
+                          colorContaner4 = Colors.black;
+                          //Biểu đồ
                           isPHVisible = false;
                           isORPVisible = false;
                           isECVisible = true;
@@ -165,18 +206,30 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       style: TextButton.styleFrom(
-                        primary: Colors.black, // Màu chữ của nút
+                        primary: colorBtnEC, // Màu chữ của nút
                       ),
                       child: Text('EC'),
                     ),
                     Container(
                       width: 1.0,
                       height: 25,
-                      color: Colors.black,
+                      color: colorContaner3,
                     ),
                     TextButton(
                       onPressed: () {
                         setState(() {
+                          //Nút
+                          colorBtnPH = Colors.black;
+                          colorBtnORP = Colors.black;
+                          colorBtnEC = Colors.black;
+                          colorBtnDO = Colors.blueAccent;
+                          colorBtnTUR = Colors.black;
+                          //Ngăn cách
+                          colorContaner1 = Colors.black;
+                          colorContaner2 = Colors.black;
+                          colorContaner3 = Colors.blueAccent;
+                          colorContaner4 = Colors.blueAccent;
+                          //Biểu đồ
                           isPHVisible = false;
                           isORPVisible = false;
                           isECVisible = false;
@@ -186,18 +239,30 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       style: TextButton.styleFrom(
-                        primary: Colors.black, // Màu chữ của nút
+                        primary: colorBtnDO, // Màu chữ của nút
                       ),
                       child: Text('DO'),
                     ),
                     Container(
                       width: 1.0,
                       height: 25,
-                      color: Colors.black,
+                      color: colorContaner4,
                     ),
                     TextButton(
                       onPressed: () {
                         setState(() {
+                          //Nút
+                          colorBtnPH = Colors.black;
+                          colorBtnORP = Colors.black;
+                          colorBtnEC = Colors.black;
+                          colorBtnDO = Colors.black;
+                          colorBtnTUR = Colors.blueAccent;
+                          //Ngăn cách
+                          colorContaner1 = Colors.black;
+                          colorContaner2 = Colors.black;
+                          colorContaner3 = Colors.black;
+                          colorContaner4 = Colors.blueAccent;
+                          //Biểu đồ
                           isPHVisible = false;
                           isORPVisible = false;
                           isECVisible = false;
@@ -207,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       style: TextButton.styleFrom(
-                        primary: Colors.black, // Màu chữ của nút
+                        primary: colorBtnTUR, // Màu chữ của nút
                       ),
                       child: Text('TUR'),
                     ),
@@ -215,18 +280,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Expanded(
-                child: _buildBarChart(
-                    _phChartData,
-                    _orpChartData,
-                    _ecChartData,
-                    _doChartData,
-                    _turbidityChartData,
-                    isPHVisible,
-                    isORPVisible,
-                    isECVisible,
-                    isDOVisible,
-                    isTurbidityVisible,
-                    TextTitle),
+                child: _buildBarChart(_chartData, isPHVisible, isORPVisible,
+                    isECVisible, isDOVisible, isTurbidityVisible, TextTitle),
               ),
             ],
           )),
@@ -286,11 +341,7 @@ Widget _buildDropDown(
 }
 
 Widget _buildBarChart(
-    List<PHData> phData,
-    List<ORPdata> orpData,
-    List<ECData> ecData,
-    List<DOData> doData,
-    List<TurbidityData> turbidityData,
+    List<ChartData> chartData,
     bool isPHVisible,
     bool isORPVisible,
     bool isECVisible,
@@ -307,10 +358,10 @@ Widget _buildBarChart(
       title: ChartTitle(text: TextTitle),
       onLegendTapped: (args) {},
       series: <ChartSeries>[
-        BarSeries<PHData, String>(
-          dataSource: phData,
-          xValueMapper: (PHData data, _) => data.day,
-          yValueMapper: (PHData data, _) => data.data,
+        BarSeries<ChartData, String>(
+          dataSource: chartData,
+          xValueMapper: (ChartData data, _) => data.time,
+          yValueMapper: (ChartData data, _) => data.phData,
           dataLabelSettings: DataLabelSettings(
               isVisible: true, textStyle: TextStyle(fontSize: 8)),
           enableTooltip: true,
@@ -318,10 +369,10 @@ Widget _buildBarChart(
           name: 'PH',
           color: Colors.blue,
         ),
-        BarSeries<ORPdata, String>(
-          dataSource: orpData,
-          xValueMapper: (ORPdata data, _) => data.day,
-          yValueMapper: (ORPdata data, _) => data.data,
+        BarSeries<ChartData, String>(
+          dataSource: chartData,
+          xValueMapper: (ChartData data, _) => data.time,
+          yValueMapper: (ChartData data, _) => data.orpData,
           dataLabelSettings: DataLabelSettings(
               isVisible: true, textStyle: TextStyle(fontSize: 8)),
           enableTooltip: true,
@@ -329,10 +380,10 @@ Widget _buildBarChart(
           name: 'ORP',
           color: Colors.blue,
         ),
-        BarSeries<ECData, String>(
-          dataSource: ecData,
-          xValueMapper: (ECData data, _) => data.day,
-          yValueMapper: (ECData data, _) => data.data,
+        BarSeries<ChartData, String>(
+          dataSource: chartData,
+          xValueMapper: (ChartData data, _) => data.time,
+          yValueMapper: (ChartData data, _) => data.ecData,
           dataLabelSettings: DataLabelSettings(
               isVisible: true, textStyle: TextStyle(fontSize: 8)),
           enableTooltip: true,
@@ -340,10 +391,10 @@ Widget _buildBarChart(
           name: 'EC',
           color: Colors.blue,
         ),
-        BarSeries<DOData, String>(
-          dataSource: doData,
-          xValueMapper: (DOData data, _) => data.day,
-          yValueMapper: (DOData data, _) => data.data,
+        BarSeries<ChartData, String>(
+          dataSource: chartData,
+          xValueMapper: (ChartData data, _) => data.time,
+          yValueMapper: (ChartData data, _) => data.doData,
           dataLabelSettings: DataLabelSettings(
               isVisible: true, textStyle: TextStyle(fontSize: 8)),
           enableTooltip: true,
@@ -351,10 +402,10 @@ Widget _buildBarChart(
           name: 'DO',
           color: Colors.blue,
         ),
-        BarSeries<TurbidityData, String>(
-          dataSource: turbidityData,
-          xValueMapper: (TurbidityData data, _) => data.day,
-          yValueMapper: (TurbidityData data, _) => data.data,
+        BarSeries<ChartData, String>(
+          dataSource: chartData,
+          xValueMapper: (ChartData data, _) => data.time,
+          yValueMapper: (ChartData data, _) => data.turbidityData,
           dataLabelSettings: DataLabelSettings(
               isVisible: true, textStyle: TextStyle(fontSize: 8)),
           enableTooltip: true,
@@ -432,6 +483,30 @@ List<TurbidityData> getTurbidityData() {
     TurbidityData("Sun", 11),
   ];
   return turbidityData;
+}
+
+List<ChartData> getChartData() {
+  List<PHData> phData = getPHData();
+  List<ORPdata> orpData = getORPData();
+  List<ECData> ecData = getECData();
+  List<DOData> doData = getDOData();
+  List<TurbidityData> turbidityData = getTurbidityData();
+
+  List<ChartData> chartDataList = [];
+
+  for (int i = 0; i < phData.length; i++) {
+    String time = phData[i].day;
+    double ph = phData[i].data;
+    int orp = orpData[i].data;
+    double ec = ecData[i].data;
+    double oxygen = doData[i].data;
+    double turbidity = turbidityData[i].data;
+
+    ChartData chartData = ChartData(time, ph, orp, ec, oxygen, turbidity);
+    chartDataList.add(chartData);
+  }
+
+  return chartDataList;
 }
 
 //30 ngày
@@ -618,6 +693,30 @@ List<TurbidityData> getTurbidityData30days() {
   return turbidityData;
 }
 
+List<ChartData> getChartData30days() {
+  List<PHData> phData = getPHData30days();
+  List<ORPdata> orpData = getORPData30days();
+  List<ECData> ecData = getECData30days();
+  List<DOData> doData = getDOData30days();
+  List<TurbidityData> turbidityData = getTurbidityData30days();
+
+  List<ChartData> chartDataList = [];
+
+  for (int i = 0; i < phData.length; i++) {
+    String time = phData[i].day;
+    double ph = phData[i].data;
+    int orp = orpData[i].data;
+    double ec = ecData[i].data;
+    double oxygen = doData[i].data;
+    double turbidity = turbidityData[i].data;
+
+    ChartData chartData = ChartData(time, ph, orp, ec, oxygen, turbidity);
+    chartDataList.add(chartData);
+  }
+
+  return chartDataList;
+}
+
 //12 tháng
 List<PHData> getPHData12months() {
   final List<PHData> phData = [
@@ -712,12 +811,47 @@ List<TurbidityData> getTurbidityData12months() {
   return turbidityData;
 }
 
+List<ChartData> getChartData12months() {
+  List<PHData> phData = getPHData12months();
+  List<ORPdata> orpData = getORPData12months();
+  List<ECData> ecData = getECData12months();
+  List<DOData> doData = getDOData12months();
+  List<TurbidityData> turbidityData = getTurbidityData12months();
+
+  List<ChartData> chartDataList = [];
+
+  for (int i = 0; i < phData.length; i++) {
+    String time = phData[i].day;
+    double ph = phData[i].data;
+    int orp = orpData[i].data;
+    double ec = ecData[i].data;
+    double oxygen = doData[i].data;
+    double turbidity = turbidityData[i].data;
+
+    ChartData chartData = ChartData(time, ph, orp, ec, oxygen, turbidity);
+    chartDataList.add(chartData);
+  }
+
+  return chartDataList;
+}
+
 // Water Quality PH/ ORP / EC / DO / Turbidity
 // ORP: độ oxy hóa khử
 // EC: độ dẫn điện
 // DO: oxy hòa tan
 // Turbidity: Độ đục
 //Create class
+class ChartData {
+  final String time;
+  final double phData;
+  final int orpData;
+  final double ecData;
+  final double doData;
+  final double turbidityData;
+  ChartData(this.time, this.phData, this.orpData, this.ecData, this.doData,
+      this.turbidityData);
+}
+
 class PHData {
   final String day;
   final double data;
