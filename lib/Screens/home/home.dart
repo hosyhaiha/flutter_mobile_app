@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobile_app/Screens/sidebar.dart';
+import 'package:flutter_mobile_app/components/rounded_button.dart';
 import 'package:flutter_mobile_app/components/rounded_dropdown.dart';
 import 'package:flutter_mobile_app/constants.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -18,6 +19,255 @@ class _HomePageState extends State<HomePage> {
   List<ECData> _ecChartData = getECData();
   List<DOData> _doChartData = getDOData();
   List<TurbidityData> _turbidityChartData = getTurbidityData();
+
+  bool isPHVisible = false;
+  bool isORPVisible = false;
+  bool isECVisible = false;
+  bool isDOVisible = true;
+  bool isTurbidityVisible = false;
+  String TextTitle = "Chất lượng nước (Độ ôxy hoà tan)";
+
+  // void handleLegendTapped(
+  //     String seriesName,
+  //     bool isPHVisible,
+  //     bool isORPVisible,
+  //     bool isECVisible,
+  //     bool isDOVisible,
+  //     bool isTurbidityVisible) {
+  //   if (seriesName == 'PH') {
+  //     setState(() {
+  //       isPHVisible = true;
+  //       isORPVisible = false;
+  //       isECVisible = false;
+  //       isDOVisible = false;
+  //       isTurbidityVisible = false;
+  //     });
+  //   } else if (seriesName == 'ORP') {
+  //     setState(() {
+  //       isPHVisible = false;
+  //       isORPVisible = true;
+  //       isECVisible = false;
+  //       isDOVisible = false;
+  //       isTurbidityVisible = false;
+  //     });
+  //   } else if (seriesName == 'EC') {
+  //     setState(() {
+  //       isPHVisible = false;
+  //       isORPVisible = false;
+  //       isECVisible = true;
+  //       isDOVisible = false;
+  //       isTurbidityVisible = false;
+  //     });
+  //   } else if (seriesName == 'DO') {
+  //     setState(() {
+  //       isPHVisible = false;
+  //       isORPVisible = false;
+  //       isECVisible = false;
+  //       isDOVisible = true;
+  //       isTurbidityVisible = false;
+  //     });
+  //   } else if (seriesName == 'Turbidity') {
+  //     setState(() {
+  //       isPHVisible = false;
+  //       isORPVisible = false;
+  //       isECVisible = false;
+  //       isDOVisible = false;
+  //       isTurbidityVisible = true;
+  //     });
+  //   }
+  //   print(seriesName);
+  // }
+
+  Widget _buildBarChart(
+    List<PHData> phData,
+    List<ORPdata> orpData,
+    List<ECData> ecData,
+    List<DOData> doData,
+    List<TurbidityData> turbidityData,
+    bool isPHVisible,
+    bool isORPVisible,
+    bool isECVisible,
+    bool isDOVisible,
+    bool isTurbidityVisible,
+  ) {
+    // void handleLegendTapped(LegendTapArgs args) {
+    //   final String seriesName = args.series.name;
+    //   if (seriesName == 'PH') {
+    //     isPHVisible = true;
+    //     isORPVisible = true;
+    //     isECVisible = true;
+    //     isDOVisible = false;
+    //     isTurbidityVisible = false;
+    //     // _buildBarChart(
+    //     //   phData,
+    //     //   orpData,
+    //     //   ecData,
+    //     //   doData,
+    //     //   turbidityData,
+    //     //   isPHVisible,
+    //     //   isORPVisible,
+    //     //   isECVisible,
+    //     //   isDOVisible,
+    //     //   isTurbidityVisible,
+    //     // );
+    //   } else if (seriesName == 'ORP') {
+    //     isPHVisible = false;
+    //     isORPVisible = true;
+    //     isECVisible = false;
+    //     isDOVisible = false;
+    //     isTurbidityVisible = false;
+    //     _buildBarChart(
+    //       phData,
+    //       orpData,
+    //       ecData,
+    //       doData,
+    //       turbidityData,
+    //       isPHVisible,
+    //       isORPVisible,
+    //       isECVisible,
+    //       isDOVisible,
+    //       isTurbidityVisible,
+    //     );
+    //   } else if (seriesName == 'EC') {
+    //     isPHVisible = false;
+    //     isORPVisible = false;
+    //     isECVisible = true;
+    //     isDOVisible = false;
+    //     isTurbidityVisible = false;
+    //     _buildBarChart(
+    //       phData,
+    //       orpData,
+    //       ecData,
+    //       doData,
+    //       turbidityData,
+    //       isPHVisible,
+    //       isORPVisible,
+    //       isECVisible,
+    //       isDOVisible,
+    //       isTurbidityVisible,
+    //     );
+    //   } else if (seriesName == 'DO') {
+    //     isPHVisible = false;
+    //     isORPVisible = false;
+    //     isECVisible = false;
+    //     isDOVisible = true;
+    //     isTurbidityVisible = false;
+    //     _buildBarChart(
+    //       phData,
+    //       orpData,
+    //       ecData,
+    //       doData,
+    //       turbidityData,
+    //       isPHVisible,
+    //       isORPVisible,
+    //       isECVisible,
+    //       isDOVisible,
+    //       isTurbidityVisible,
+    //     );
+    //   } else if (seriesName == 'Turbidity') {
+    //     isPHVisible = false;
+    //     isORPVisible = false;
+    //     isECVisible = false;
+    //     isDOVisible = false;
+    //     isTurbidityVisible = true;
+    //     _buildBarChart(
+    //       phData,
+    //       orpData,
+    //       ecData,
+    //       doData,
+    //       turbidityData,
+    //       isPHVisible,
+    //       isORPVisible,
+    //       isECVisible,
+    //       isDOVisible,
+    //       isTurbidityVisible,
+    //     );
+    //   }
+    //   // print(args.series.name);
+    // }
+
+    return Container(
+      child: Column(
+        children: [
+          SfCartesianChart(
+            primaryXAxis: CategoryAxis(),
+            primaryYAxis: NumericAxis(),
+            title: ChartTitle(text: TextTitle),
+            // legend: Legend(
+            //   isVisible: true,
+            //   position: LegendPosition.top,
+            //   textStyle: TextStyle(fontSize: 20),
+            //   overflowMode: LegendItemOverflowMode.wrap,
+            //   alignment: ChartAlignment.center,
+            //   toggleSeriesVisibility: true,
+            // ),
+            onLegendTapped: (args) {
+              // handleLegendTapped(
+              //   args.series.name,
+              //   isPHVisible,
+              //   isORPVisible,
+              //   isECVisible,
+              //   isDOVisible,
+              //   isTurbidityVisible,
+              // );
+            },
+            series: <ChartSeries>[
+              BarSeries<PHData, String>(
+                dataSource: phData,
+                xValueMapper: (PHData data, _) => data.day,
+                yValueMapper: (PHData data, _) => data.data,
+                dataLabelSettings: DataLabelSettings(isVisible: true),
+                enableTooltip: true,
+                isVisible: isPHVisible,
+                name: 'PH',
+                color: Colors.blue,
+              ),
+              BarSeries<ORPdata, String>(
+                dataSource: orpData,
+                xValueMapper: (ORPdata data, _) => data.day,
+                yValueMapper: (ORPdata data, _) => data.data,
+                dataLabelSettings: DataLabelSettings(isVisible: true),
+                enableTooltip: true,
+                isVisible: isORPVisible,
+                name: 'ORP',
+                color: Colors.blue,
+              ),
+              BarSeries<ECData, String>(
+                dataSource: ecData,
+                xValueMapper: (ECData data, _) => data.day,
+                yValueMapper: (ECData data, _) => data.data,
+                dataLabelSettings: DataLabelSettings(isVisible: true),
+                enableTooltip: true,
+                isVisible: isECVisible,
+                name: 'EC',
+                color: Colors.blue,
+              ),
+              BarSeries<DOData, String>(
+                dataSource: doData,
+                xValueMapper: (DOData data, _) => data.day,
+                yValueMapper: (DOData data, _) => data.data,
+                dataLabelSettings: DataLabelSettings(isVisible: true),
+                enableTooltip: true,
+                isVisible: isDOVisible,
+                name: 'DO',
+                color: Colors.blue,
+              ),
+              BarSeries<TurbidityData, String>(
+                dataSource: turbidityData,
+                xValueMapper: (TurbidityData data, _) => data.day,
+                yValueMapper: (TurbidityData data, _) => data.data,
+                dataLabelSettings: DataLabelSettings(isVisible: true),
+                enableTooltip: true,
+                isVisible: isTurbidityVisible,
+                name: 'Turbidity',
+                color: Colors.blue,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,28 +290,10 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               RoundedDropdown(
-                icon: Icons.access_alarm,
+                icon: Icons.smartphone,
                 hint: 'From',
-                dropdownValue: '24 giờ gần nhất',
-                dropdownItems: [
-                  '24 giờ gần nhất',
-                  '7 ngày gần nhất',
-                  '30 ngày gần nhất'
-                ],
-                onChanged: (String? value) {
-                  // TODO: Handle dropdown value change
-                },
-              ),
-              RoundedDropdown(
-                icon: Icons.insert_chart_outlined_outlined,
-                hint: 'From',
-                dropdownValue: 'Tất cả biểu đồ',
-                dropdownItems: [
-                  'Tất cả biểu đồ',
-                  'Biểu đồ đường',
-                  'Biểu đồ cột',
-                  'Biểu đồ hàng'
-                ],
+                dropdownValue: 'Device 1',
+                dropdownItems: ['Device 1', 'Device 2', 'Device 3'],
                 onChanged: (String? value) {
                   setState(() {
                     selectedChartType = value;
@@ -69,39 +301,131 @@ class _HomePageState extends State<HomePage> {
                   // TODO: Handle dropdown value change
                 },
               ),
+              RoundedDropdown(
+                icon: Icons.access_alarm,
+                hint: 'From',
+                dropdownValue: '24 giờ gần nhất',
+                dropdownItems: [
+                  '24 giờ gần nhất',
+                  '30 ngày gần nhất',
+                  '12 tháng gần nhất'
+                ],
+                onChanged: (String? value) {
+                  // TODO: Handle dropdown value change
+                },
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        isPHVisible = true;
+                        isORPVisible = false;
+                        isECVisible = false;
+                        isDOVisible = false;
+                        isTurbidityVisible = false;
+                        TextTitle = "Chất lượng nước (Độ pH)";
+                      });
+                    },
+                    child: Text('PH'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        isPHVisible = false;
+                        isORPVisible = true;
+                        isECVisible = false;
+                        isDOVisible = false;
+                        isTurbidityVisible = false;
+                        TextTitle = "Chất lượng nước (Độ ôxy hoá khử)";
+                      });
+                    },
+                    child: Text('ORP'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        isPHVisible = false;
+                        isORPVisible = false;
+                        isECVisible = true;
+                        isDOVisible = false;
+                        isTurbidityVisible = false;
+                        TextTitle = "Chất lượng nước (Độ dẫn điện)";
+                      });
+                    },
+                    child: Text('EC'),
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          isPHVisible = false;
+                          isORPVisible = false;
+                          isECVisible = false;
+                          isDOVisible = true;
+                          isTurbidityVisible = false;
+                          TextTitle = "Chất lượng nước (Độ ôxy hoà tan)";
+                        });
+                      },
+                      child: Text('DO')),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          isPHVisible = false;
+                          isORPVisible = false;
+                          isECVisible = false;
+                          isDOVisible = false;
+                          isTurbidityVisible = true;
+                          TextTitle = "Chất lượng nước (Độ đục)";
+                        });
+                      },
+                      child: Text('TUR'))
+                ],
+              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     ElevatedButton(
+              //         onPressed: () {
+              //           setState(() {
+              //             isPHVisible = false;
+              //             isORPVisible = false;
+              //             isECVisible = false;
+              //             isDOVisible = true;
+              //             isTurbidityVisible = false;
+              //             TextTitle = "Chất lượng nước (DO)";
+              //           });
+              //         },
+              //         child: Text('DO')),
+              //     ElevatedButton(
+              //         onPressed: () {
+              //           setState(() {
+              //             isPHVisible = false;
+              //             isORPVisible = false;
+              //             isECVisible = false;
+              //             isDOVisible = false;
+              //             isTurbidityVisible = true;
+              //             TextTitle = "Chất lượng nước (Turbidity)";
+              //           });
+              //         },
+              //         child: Text('NTU'))
+              //   ],
+              // ),
               Expanded(
                 child: ListView(
                   children: [
-                    if (selectedChartType == null ||
-                        selectedChartType == 'Tất cả biểu đồ' ||
-                        selectedChartType == 'Biểu đồ đường')
-                      _buildLineChart(
-                        _phChartData,
-                        _orpChartData,
-                        _ecChartData,
-                        _doChartData,
-                        _turbidityChartData,
-                      ),
-                    if (selectedChartType == null ||
-                        selectedChartType == 'Tất cả biểu đồ' ||
-                        selectedChartType == 'Biểu đồ hàng')
-                      _buildBarChart(
-                        _phChartData,
-                        _orpChartData,
-                        _ecChartData,
-                        _doChartData,
-                        _turbidityChartData,
-                      ),
-                    if (selectedChartType == null ||
-                        selectedChartType == 'Tất cả biểu đồ' ||
-                        selectedChartType == 'Biểu đồ cột')
-                      _buildColumnChart(
-                        _phChartData,
-                        _orpChartData,
-                        _ecChartData,
-                        _doChartData,
-                        _turbidityChartData,
-                      ),
+                    _buildBarChart(
+                      _phChartData,
+                      _orpChartData,
+                      _ecChartData,
+                      _doChartData,
+                      _turbidityChartData,
+                      isPHVisible,
+                      isORPVisible,
+                      isECVisible,
+                      isDOVisible,
+                      isTurbidityVisible,
+                    ),
                   ],
                 ),
               ),
@@ -109,238 +433,6 @@ class _HomePageState extends State<HomePage> {
           )),
     );
   }
-}
-
-Widget _buildLineChart(
-  List<PHData> phData,
-  List<ORPdata> orpData,
-  List<ECData> ecData,
-  List<DOData> doData,
-  List<TurbidityData> turbidityData,
-) {
-  bool isPHVisible = false;
-  bool isORPVisible = false;
-  bool isECVisible = false;
-  bool isDOVisible = true;
-  bool isTurbidityVisible = false;
-
-  return Container(
-    child: Column(
-      children: [
-        SfCartesianChart(
-          primaryXAxis: CategoryAxis(),
-          primaryYAxis: NumericAxis(),
-          title: ChartTitle(text: "Chất lượng nước (Biểu đồ đường)"),
-          legend: Legend(isVisible: true, position: LegendPosition.bottom),
-          series: <ChartSeries>[
-            LineSeries<PHData, String>(
-              dataSource: phData,
-              xValueMapper: (PHData data, _) => data.day,
-              yValueMapper: (PHData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isPHVisible,
-              name: 'PH',
-              // name: 'PH (pH)',
-            ),
-            LineSeries<ORPdata, String>(
-              dataSource: orpData,
-              xValueMapper: (ORPdata data, _) => data.day,
-              yValueMapper: (ORPdata data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isORPVisible,
-              name: 'ORP',
-              // name: 'ORP (mV)',
-            ),
-            LineSeries<ECData, String>(
-              dataSource: ecData,
-              xValueMapper: (ECData data, _) => data.day,
-              yValueMapper: (ECData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isECVisible,
-              name: 'EC',
-              // name: 'EC (µS/cm)',
-            ),
-            LineSeries<DOData, String>(
-              dataSource: doData,
-              xValueMapper: (DOData data, _) => data.day,
-              yValueMapper: (DOData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isDOVisible,
-              name: 'DO',
-              // name: 'DO (mg/L)',
-            ),
-            LineSeries<TurbidityData, String>(
-              dataSource: turbidityData,
-              xValueMapper: (TurbidityData data, _) => data.day,
-              yValueMapper: (TurbidityData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isTurbidityVisible,
-              name: 'Turbidity',
-              // name: 'Turbidity (NTU)',
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
-}
-
-Widget _buildBarChart(
-  List<PHData> phData,
-  List<ORPdata> orpData,
-  List<ECData> ecData,
-  List<DOData> doData,
-  List<TurbidityData> turbidityData,
-) {
-  bool isPHVisible = false;
-  bool isORPVisible = false;
-  bool isECVisible = false;
-  bool isDOVisible = true;
-  bool isTurbidityVisible = false;
-
-  return Container(
-    child: Column(
-      children: [
-        SfCartesianChart(
-          primaryXAxis: CategoryAxis(),
-          primaryYAxis: NumericAxis(),
-          title: ChartTitle(text: "Chất lượng nước (Biểu đồ cột)"),
-          legend: Legend(isVisible: true, position: LegendPosition.bottom),
-          series: <ChartSeries>[
-            BarSeries<PHData, String>(
-              dataSource: phData,
-              xValueMapper: (PHData data, _) => data.day,
-              yValueMapper: (PHData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isPHVisible,
-              name: 'PH',
-            ),
-            BarSeries<ORPdata, String>(
-              dataSource: orpData,
-              xValueMapper: (ORPdata data, _) => data.day,
-              yValueMapper: (ORPdata data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isORPVisible,
-              name: 'ORP',
-            ),
-            BarSeries<ECData, String>(
-              dataSource: ecData,
-              xValueMapper: (ECData data, _) => data.day,
-              yValueMapper: (ECData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isECVisible,
-              name: 'EC',
-            ),
-            BarSeries<DOData, String>(
-              dataSource: doData,
-              xValueMapper: (DOData data, _) => data.day,
-              yValueMapper: (DOData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isDOVisible,
-              name: 'DO',
-            ),
-            BarSeries<TurbidityData, String>(
-              dataSource: turbidityData,
-              xValueMapper: (TurbidityData data, _) => data.day,
-              yValueMapper: (TurbidityData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isTurbidityVisible,
-              name: 'Turbidity',
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
-}
-
-Widget _buildColumnChart(
-  List<PHData> phData,
-  List<ORPdata> orpData,
-  List<ECData> ecData,
-  List<DOData> doData,
-  List<TurbidityData> turbidityData,
-) {
-  bool isPHVisible = false;
-  bool isORPVisible = false;
-  bool isECVisible = false;
-  bool isDOVisible = true;
-  bool isTurbidityVisible = false;
-
-  return Container(
-    child: Column(
-      children: [
-        SfCartesianChart(
-          primaryXAxis: CategoryAxis(),
-          primaryYAxis: NumericAxis(),
-          title: ChartTitle(text: "Chất lượng nước (Biểu đồ cột)"),
-          legend: Legend(isVisible: true, position: LegendPosition.bottom),
-          series: <ChartSeries>[
-            ColumnSeries<PHData, String>(
-              dataSource: phData,
-              xValueMapper: (PHData data, _) => data.day,
-              yValueMapper: (PHData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isPHVisible,
-              name: 'PH',
-              // name: 'PH (pH)',
-            ),
-            ColumnSeries<ORPdata, String>(
-              dataSource: orpData,
-              xValueMapper: (ORPdata data, _) => data.day,
-              yValueMapper: (ORPdata data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isORPVisible,
-              name: 'ORP',
-              // name: 'ORP (mV)',
-            ),
-            ColumnSeries<ECData, String>(
-              dataSource: ecData,
-              xValueMapper: (ECData data, _) => data.day,
-              yValueMapper: (ECData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isECVisible,
-              name: 'EC',
-              // name: 'EC (µS/cm)',
-            ),
-            ColumnSeries<DOData, String>(
-              dataSource: doData,
-              xValueMapper: (DOData data, _) => data.day,
-              yValueMapper: (DOData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isDOVisible,
-              name: 'DO',
-              // name: 'DO (mg/L)',
-            ),
-            ColumnSeries<TurbidityData, String>(
-              dataSource: turbidityData,
-              xValueMapper: (TurbidityData data, _) => data.day,
-              yValueMapper: (TurbidityData data, _) => data.data,
-              dataLabelSettings: DataLabelSettings(isVisible: true),
-              enableTooltip: true,
-              isVisible: isTurbidityVisible,
-              name: 'Turbidity',
-              // name: 'Turbidity (NTU)',
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
 }
 
 List<PHData> getPHData() {
