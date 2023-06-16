@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobile_app/Screens/sidebar.dart';
 import 'package:flutter_mobile_app/constants.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,6 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   String? selectedChartType;
   List<ChartData> _chartData = getChartData30days();
 
@@ -52,10 +57,29 @@ class _HomePageState extends State<HomePage> {
       });
       print('New dropdown value: $_selectedTimeOption');
       if (newValue == '12 tháng gần nhất') {
-        setState(() {
-          _chartData = getChartData();
-        });
+        getChartDataApi();
       }
+    }
+  }
+
+  void getChartDataApi() async {
+    // final SharedPreferences? prefs = await _prefs;
+    // final String? token = prefs?.getString('token');
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6Mjc2MDY5MTEwOTIsInNjb3BlIjpbIlJPTEVfU1lTVEVNX0FETUlOIl0sInRlbmFudF9pZCI6MCwidXNlcl9pZCI6MX0.mwmBxcv06sax3JRZannBeJEzsO51-2wXXeJ4ETJWG4T3nkGZcjfOaeFMI81FvmoUJ5f7R5iskAlorIcuwZR1xg'
+    };
+    var url = Uri.parse("http://10.2.9.138:8080/api/content-instant/getDataHourReport?deviceId=SAEbb50bcce-991a-4b4d-a68f-709b606312fe&type=1");
+    http.Response response = await http.get(url, headers: headers);
+    var json = jsonDecode(response.body);
+    List<ChartData> listChartData = [];
+    if (response.statusCode == 200) {
+      for (var data in json) {
+        listChartData.add(ChartData.fromJson(data));
+      }
+      setState(() {
+        _chartData = listChartData;
+      });
     }
   }
 
@@ -71,7 +95,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavBar(
+      drawer: const NavBar(
         isHomePage: true,
         isDevicePage: false,
       ),
@@ -93,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                 child: _buildDropDown(_selectedDeviceOption, _deviceoptions,
                     Icons.smartphone, _onDropdownDeviceChanged),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
@@ -101,11 +125,11 @@ class _HomePageState extends State<HomePage> {
                 child: _buildDropDown(_selectedTimeOption, _timeoptions,
                     Icons.access_alarm, _onDropdownTimeChanged),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.horizontal(
                     left: Radius.circular(15.0),
                     right: Radius.circular(15.0),
@@ -361,7 +385,7 @@ Widget _buildBarChart(
         BarSeries<ChartData, String>(
           dataSource: chartData,
           xValueMapper: (ChartData data, _) => data.time,
-          yValueMapper: (ChartData data, _) => data.phData,
+          yValueMapper: (ChartData data, _) => data.ph,
           dataLabelSettings: DataLabelSettings(
               isVisible: true, textStyle: TextStyle(fontSize: 8)),
           enableTooltip: true,
@@ -372,7 +396,7 @@ Widget _buildBarChart(
         BarSeries<ChartData, String>(
           dataSource: chartData,
           xValueMapper: (ChartData data, _) => data.time,
-          yValueMapper: (ChartData data, _) => data.orpData,
+          yValueMapper: (ChartData data, _) => data.orp,
           dataLabelSettings: DataLabelSettings(
               isVisible: true, textStyle: TextStyle(fontSize: 8)),
           enableTooltip: true,
@@ -383,7 +407,7 @@ Widget _buildBarChart(
         BarSeries<ChartData, String>(
           dataSource: chartData,
           xValueMapper: (ChartData data, _) => data.time,
-          yValueMapper: (ChartData data, _) => data.ecData,
+          yValueMapper: (ChartData data, _) => data.ec,
           dataLabelSettings: DataLabelSettings(
               isVisible: true, textStyle: TextStyle(fontSize: 8)),
           enableTooltip: true,
@@ -394,7 +418,7 @@ Widget _buildBarChart(
         BarSeries<ChartData, String>(
           dataSource: chartData,
           xValueMapper: (ChartData data, _) => data.time,
-          yValueMapper: (ChartData data, _) => data.doData,
+          yValueMapper: (ChartData data, _) => data.dso,
           dataLabelSettings: DataLabelSettings(
               isVisible: true, textStyle: TextStyle(fontSize: 8)),
           enableTooltip: true,
@@ -405,7 +429,7 @@ Widget _buildBarChart(
         BarSeries<ChartData, String>(
           dataSource: chartData,
           xValueMapper: (ChartData data, _) => data.time,
-          yValueMapper: (ChartData data, _) => data.turbidityData,
+          yValueMapper: (ChartData data, _) => data.turb,
           dataLabelSettings: DataLabelSettings(
               isVisible: true, textStyle: TextStyle(fontSize: 8)),
           enableTooltip: true,
@@ -497,7 +521,7 @@ List<ChartData> getChartData() {
   for (int i = 0; i < phData.length; i++) {
     String time = phData[i].day;
     double ph = phData[i].data;
-    int orp = orpData[i].data;
+    double orp = orpData[i].data;
     double ec = ecData[i].data;
     double oxygen = doData[i].data;
     double turbidity = turbidityData[i].data;
@@ -705,7 +729,7 @@ List<ChartData> getChartData30days() {
   for (int i = 0; i < phData.length; i++) {
     String time = phData[i].day;
     double ph = phData[i].data;
-    int orp = orpData[i].data;
+    double orp = orpData[i].data;
     double ec = ecData[i].data;
     double oxygen = doData[i].data;
     double turbidity = turbidityData[i].data;
@@ -823,7 +847,7 @@ List<ChartData> getChartData12months() {
   for (int i = 0; i < phData.length; i++) {
     String time = phData[i].day;
     double ph = phData[i].data;
-    int orp = orpData[i].data;
+    double orp = orpData[i].data;
     double ec = ecData[i].data;
     double oxygen = doData[i].data;
     double turbidity = turbidityData[i].data;
@@ -843,13 +867,20 @@ List<ChartData> getChartData12months() {
 //Create class
 class ChartData {
   final String time;
-  final double phData;
-  final int orpData;
-  final double ecData;
-  final double doData;
-  final double turbidityData;
-  ChartData(this.time, this.phData, this.orpData, this.ecData, this.doData,
-      this.turbidityData);
+  final double ph;
+  final double orp;
+  final double ec;
+  final double dso;
+  final double turb;
+  ChartData(this.time, this.ph, this.orp, this.ec, this.dso,
+      this.turb);
+  ChartData.fromJson(Map<String, dynamic> json):
+        time= json['time'],
+        ph = json['ph'],
+        orp = json['orp'],
+        ec = json['ec'],
+        dso = json['dso'],
+        turb = json['turb'];
 }
 
 class PHData {
@@ -860,7 +891,7 @@ class PHData {
 
 class ORPdata {
   final String day;
-  final int data;
+  final double data;
   ORPdata(this.day, this.data);
 }
 
