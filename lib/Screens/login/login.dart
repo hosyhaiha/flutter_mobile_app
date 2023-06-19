@@ -88,19 +88,19 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
           LoginForm(isLogin: isLogin, animationDuration: animationDuration, size: size, defaultLoginSize: defaultLoginSize),
 
           // Register Container
-          AnimatedBuilder(
-            animation: animationController!,
-            builder: (context, child) {
-              if (viewInset == 0 && isLogin) {
-                return buildRegisterContainer();
-              } else if (!isLogin) {
-                return buildRegisterContainer();
-              }
-
-              // Returning empty container to hide the widget
-              return Container();
-            },
-          ),
+          // AnimatedBuilder(
+          //   animation: animationController!,
+          //   builder: (context, child) {
+          //     if (viewInset == 0 && isLogin) {
+          //       return buildRegisterContainer();
+          //     } else if (!isLogin) {
+          //       return buildRegisterContainer();
+          //     }
+          //
+          //     // Returning empty container to hide the widget
+          //     return Container();
+          //   },
+          // ),
 
           // Register Form
           RegisterForm(isLogin: isLogin, animationDuration: animationDuration, size: size, defaultLoginSize: defaultRegisterSize),

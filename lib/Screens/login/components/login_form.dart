@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile_app/Screens/controller/LoginController.dart';
 import 'package:flutter_mobile_app/components/rounded_button.dart';
 import 'package:flutter_mobile_app/components/rounded_input.dart';
 import 'package:flutter_mobile_app/components/rounded_password_input.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_mobile_app/Screens/home/home.dart';
+import 'package:get/get.dart';
 
-class LoginForm extends StatelessWidget {
-  void navigateToHomePage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage()),
-    );
-  }
-
+class LoginForm extends StatefulWidget {
   const LoginForm({
     Key? key,
     required this.isLogin,
@@ -27,15 +22,28 @@ class LoginForm extends StatelessWidget {
   final double defaultLoginSize;
 
   @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  LoginController loginController = Get.put(LoginController());
+  void navigateToHomePage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      opacity: isLogin ? 1.0 : 0.0,
-      duration: animationDuration * 4,
+      opacity: widget.isLogin ? 1.0 : 0.0,
+      duration: widget.animationDuration * 4,
       child: Align(
         alignment: Alignment.center,
         child: SizedBox(
-          width: size.width,
-          height: defaultLoginSize,
+          width: widget.size.width,
+          height: widget.defaultLoginSize,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,15 +70,21 @@ class LoginForm extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                const RoundedInput(icon: Icons.mail, hint: 'Username'),
+                 RoundedInput(
+                  icon: Icons.mail,
+                  hint: 'Email',
+                  textEditingController: loginController.emailController,
+                ),
 
-                const RoundedPasswordInput(hint: 'Password'),
+                RoundedPasswordInput(textEditingController: loginController.passwordController, hint: 'Password'),
 
                 const SizedBox(height: 10),
 
                 GestureDetector(
                     onTap: () {
-                      navigateToHomePage(context);
+                      // navigateToHomePage(context);
+                      // print('-----------------${loginController.passwordController.text}');
+                      loginController.login(context);
                     },
                     child: const RoundedButton(title: 'LOGIN')),
 

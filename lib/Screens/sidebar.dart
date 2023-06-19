@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_mobile_app/Screens/device/devicedata.dart';
 import 'package:flutter_mobile_app/Screens/home/home.dart';
 import 'package:flutter_mobile_app/Screens/login/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NavBar extends StatelessWidget {
   final bool isHomePage, isDevicePage;
@@ -12,13 +13,6 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  // void navigateToDevicePage(BuildContext context) {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => DeviceData()),
-  //   );
-  // }
-
   void navigateToHomePage(BuildContext context) {
     Navigator.push(
       context,
@@ -26,19 +20,9 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  // void navigateToHomePage(BuildContext context) {
-  //   Navigator.pop(context); // Đóng thanh sidebar
-  //   if (isHomePage) {
-  //     print("This is " + isHomePage.toString());
-  //     return; // Không cần tải lại trang
-  //   }
-  //   Navigator.pushReplacement(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => HomePage()),
-  //   );
-  // }
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  const NavBar(
+  NavBar(
       {super.key, required this.isHomePage, required this.isDevicePage});
 
   @override
@@ -97,7 +81,11 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Log out'),
-            onTap: () => navigateToLoginPage(context),
+            onTap: () async {
+              final SharedPreferences? prefs = await _prefs;
+              prefs?.clear();
+              navigateToLoginPage(context);
+              },
           )
         ],
       ),
